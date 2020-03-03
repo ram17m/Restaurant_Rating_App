@@ -30,4 +30,39 @@ const getAllMedia = () => {
   return [data, loading];
 };
 
-export { getAllMedia };
+const login = async data => {
+  const fetchOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  };
+  try {
+    const response = await fetch(apiUrl + "login", fetchOptions);
+    const json = await response.json();
+    return json;
+  } catch (e) {
+    console.log("error", e.message);
+  }
+};
+
+const register = async data => {
+  const fetchOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  };
+  try {
+    const response = await fetch(apiUrl + "users", fetchOptions);
+    const json = await response.json();
+    console.log("registerResponse", json);
+    return json;
+  } catch (e) {
+    console.log("error", e.message);
+  }
+};
+
+export { getAllMedia, login, register };
