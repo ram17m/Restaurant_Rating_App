@@ -3,16 +3,18 @@ import { View } from "react-native";
 import List from "../components/List.js";
 import PropTypes from "prop-types";
 
-const Home = props => {
+const MyFiles = props => {
   const { navigation } = props;
+
   return (
     <View>
-      <List navigation={navigation} mode="all"></List>
+      <List navigation={navigation} mode="myFiles"></List>
     </View>
   );
 };
-Home.propTypes = {
+
+MyFiles.propTypes = {
   navigation: PropTypes.object
 };
 
-export default Home;
+export default MyFiles;

@@ -27,9 +27,11 @@ const Profile = props => {
     console.log("userJSON", userJSON);
     const user = JSON.parse(userJSON);
     console.log("user", user);
-    const tagObject = await getAvatar(user.user_id);
-    console.log(tagObject);
-    user.avatarFilename = tagObject[0].filename;
+    const tagArray = await getAvatar(user.user_id);
+    console.log(tagArray);
+    if (tagArray.length > 0) {
+      user.avatarFilename = tagArray[0].filename;
+    }
     console.log("newUser", user);
     setUser(() => {
       return user;
@@ -49,10 +51,12 @@ const Profile = props => {
             </Left>
           </CardItem>
           <CardItem style={{ margin: 20 }} cardBody>
-            <Image
-              style={{ height: 300, width: null, flex: 1 }}
-              source={{ uri: mediaURL + user.avatarFilename }}
-            />
+            {user.avatarFilename && (
+              <Image
+                style={{ height: 300, width: null, flex: 1 }}
+                source={{ uri: mediaURL + user.avatarFilename }}
+              />
+            )}
           </CardItem>
           <CardItem>
             <Body>
@@ -60,6 +64,16 @@ const Profile = props => {
               <Text>Email: {user.email}</Text>
             </Body>
           </CardItem>
+          <Button
+            full
+            style={{ margin: 10 }}
+            onPress={() => {
+              console.log("myFiles btn pressed");
+              props.navigation.navigate("MyFiles");
+            }}
+          >
+            <Text>My Files</Text>
+          </Button>
           <Button
             full
             style={{ margin: 10 }}
@@ -72,16 +86,6 @@ const Profile = props => {
         </Card>
       </Content>
     </Container>
-
-    //   <View style={styles.container}>
-    //     <Text>username: {user.username}</Text>
-    //     <Text>Full Name: {user.full_name}</Text>
-    //     <Text>Email: {user.email}</Text>
-    //     <Button
-    //       title='Logout!'
-    //       onPress={signOutAsync}
-    //     />
-    //   </View>
   );
 };
 

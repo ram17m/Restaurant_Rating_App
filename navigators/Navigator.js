@@ -4,14 +4,18 @@ import { createBottomTabNavigator } from "react-navigation-tabs";
 import { createStackNavigator } from "react-navigation-stack";
 import Home from "../views/Home.js";
 import Profile from "../views/Profile.js";
+import Upload from "../views/Upload.js";
 import Single from "../views/Single.js";
-import AuthLoading from "../views/AuthLoading.js";
 import Login from "../views/Login.js";
+import MyFiles from "../views/MyFiles.js";
+import Modify from "../views/Modify.js";
+import AuthLoading from "../views/AuthLoading.js";
 import { Icon } from "native-base";
 
 const TabNavigator = createBottomTabNavigator(
   {
     Home,
+    Upload,
     Profile
   },
   {
@@ -23,8 +27,9 @@ const TabNavigator = createBottomTabNavigator(
           iconName = "home";
         } else if (routeName === "Profile") {
           iconName = "person";
+        } else if (routeName === "Upload") {
+          iconName = "cloud-upload";
         }
-
         // You can return any component that you like here!
         return <Icon name={iconName} size={25} />;
       }
@@ -44,6 +49,12 @@ const StackNavigator = createStackNavigator({
   },
   Logout: {
     screen: Login
+  },
+  MyFiles: {
+    screen: MyFiles
+  },
+  Modify: {
+    screen: Modify
   }
 });
 
